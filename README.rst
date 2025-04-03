@@ -1,6 +1,15 @@
 ===================================
-PDF417 barcode generator for Python
+PDF417 barcode generator for Python (with MarcroPDF) support.
 ===================================
+
+This is a (temporary) fork of https://github.com/ihabunek/pdf417-py with support for
+
+- MacroPDF encoding of bardcodes across multiiple files
+- End to end testing against the pdf417decoder library
+
+This will disappear when https://github.com/ihabunek/pdf417-py/pull/23 is merged
+
+----------
 
 .. image:: https://img.shields.io/travis/ihabunek/pdf417-py.svg?maxAge=3600&style=flat-square
    :target: https://travis-ci.org/ihabunek/pdf417-py
