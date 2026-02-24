@@ -5,6 +5,7 @@ from typing import List, Tuple, Union, Optional, Dict, Any
 from pdf417gen.codes import map_code_word
 from pdf417gen.compaction import compact
 from pdf417gen.compaction.numeric import compact_numbers
+from pdf417gen.compaction.text import compact_text
 from pdf417gen.error_correction import compute_error_correction_code_words
 from pdf417gen.types import Barcode, Codeword
 from pdf417gen.util import chunks, to_bytes
@@ -393,9 +394,10 @@ def encode_optional_field(field_id: int, value: Any) -> List[Codeword]:
         raise ValueError("Timestamp field is not supported")
     
     elif field_id in (MACRO_FILE_NAME, MACRO_SENDER, MACRO_ADDRESSEE):
-        # Text fields use text compaction
+        # Text fields use text compaction only (no mode switching to
+        # numeric/byte compaction which confuses some decoders)
         text_value = str(value)
-        compacted = list(compact(to_bytes(text_value)))
+        compacted = list(compact_text(to_bytes(text_value)))
         result.extend(compacted)
     
     elif field_id == MACRO_FILE_SIZE:
